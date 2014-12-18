@@ -55,13 +55,14 @@ pixiv =
         params = makeQuery
             p: 1
             illust_id: workId
-            "PHPSESSID": Session.sessionId
+            "PHPSESSID": session.sessionId
         url = "#{API_URL_BASE}/illust.php?#{params}"
         request.get
             url: url
         , (error, resp, body) ->
             if error
                 callback error
+            console.log resp
             callback null, (Work.parseSingle body)
 
     getGrapichWorkPromise: (session, workId) ->
