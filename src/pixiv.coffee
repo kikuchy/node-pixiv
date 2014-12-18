@@ -1,7 +1,6 @@
 API_URL_BASE = "http://spapi.pixiv.net/iphone"
 LOGIN_PAGE_URL = "https://www.secure.pixiv.net/login.php"
 
-jsdom = require "jsdom"
 Promise = (require "es6-promise").Promise
 request = require "request"
 
