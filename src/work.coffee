@@ -3,7 +3,7 @@ CSV = require "comma-separated-values"
 class Work
     constructor: (@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @isAdultOnly)->
         @entryDate  = if entryDate instanceof Date then entryDate else new Date(entryDate)
-        @tags       = if tags instanceof Array then tags else tags.split ","
+        @tags       = if tags instanceof Array then tags else tags.split " "
 
     @parseSingle: (rawCSV) ->
         c = new CSV rawCSV
@@ -19,9 +19,11 @@ class GraphicWork extends Work
 
 class IllustWork extends GraphicWork
     constructor: (@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @isAdultOnly, @serverNumber, @smallThumbnail, @middleThumbnail)->
+        super(@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @isAdultOnly, @serverNumber, @smallThumbnail, @middleThumbnail)
 
 class MangaWork extends GraphicWork
     constructor: (@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @isAdultOnly, @serverNumber, @smallThumbnail, @middleThumbnail, @pageCount)->
+        super(@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @isAdultOnly, @serverNumber, @smallThumbnail, @middleThumbnail)
 
 class AnimationWork extends GraphicWork
 
