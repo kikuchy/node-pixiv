@@ -23,7 +23,6 @@
       "request": "^2.45.0",
       "es6-promise": "^2.0.1",
       "coffee-script": "1.6.3",
-      "jsdom": "^1.0.3",
       "comma-separated-values": "^3.6.1"
   }
 }
