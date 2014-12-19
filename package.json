@@ -6,7 +6,6 @@
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script --require coffee-script",
     "prepublish": "coffee -o lib/ -c src/*.coffee",
-    "install": "coffee -o lib/ -c src/*.coffee"
   },
   "repository": {
     "type": "git",
