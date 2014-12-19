@@ -42,14 +42,6 @@ pixiv =
             callback null, (new Session sessId)
         )
 
-    createSessionPromise: (userId, password) ->
-        return new Promise (resolve, reject) ->
-            pixiv.createSession (error, session) ->
-                if error
-                    reject error
-                resolve session
-            , userId, password
-
     getGrapichWork: (callback, session, workId) ->
         params = makeQuery
             p: 1
@@ -62,13 +54,5 @@ pixiv =
             if error
                 callback error
             callback null, (Work.parseSingle body)
-
-    getGrapichWorkPromise: (session, workId) ->
-        return new Promise (resolve, reject) ->
-            pixiv.getGrapichWork (error, work) ->
-                if error
-                    reject error
-                resolve work
-            , session, workId
 
 module.exports = pixiv
