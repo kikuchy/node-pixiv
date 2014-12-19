@@ -58,7 +58,6 @@ pixiv =
         , (error, resp, body) ->
             if error
                 callback error
-            console.log resp
             callback null, (Work.parseSingle body)
 
     getGrapichWorkPromise: (session, workId) ->
