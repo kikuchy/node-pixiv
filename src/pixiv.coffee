@@ -8,10 +8,7 @@ Session = require "./session"
 {Work}  = require "./work"
 
 makeQuery = (obj) ->
-    ret = []
-    for key of obj
-        ret.push "#{encodeURIComponent key}=#{encodeURIComponent obj[key]}"
-    ret.join "&"
+    ("#{encodeURIComponent key}=#{encodeURIComponent obj[key]}" for key of obj).join "&"
 
 pixiv =
     createSession: () ->
