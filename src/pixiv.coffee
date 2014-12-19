@@ -42,7 +42,7 @@ pixiv =
             callback null, (new Session sessId)
         )
 
-    getGrapichWork: (callback, session, workId) ->
+    getGrapichWork: (session, workId, callback) ->
         params = makeQuery
             p: 1
             illust_id: workId
