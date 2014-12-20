@@ -1,7 +1,6 @@
-API_URL_BASE = "http://spapi.pixiv.net/iphone" or process.env.PIXIV_API_URL_BASE
-LOGIN_PAGE_URL = "https://www.secure.pixiv.net/login.php" or process.env.PIXIV_LOGIN_PAGE_URL
+API_URL_BASE = "http://spapi.pixiv.net/iphone"
+LOGIN_PAGE_URL = "https://www.secure.pixiv.net/login.php"
 
-Promise = (require "es6-promise").Promise
 request = require "request"
 
 Session = require "./session"
@@ -11,6 +10,11 @@ makeQuery = (obj) ->
     ("#{encodeURIComponent key}=#{encodeURIComponent obj[key]}" for key of obj).join "&"
 
 pixiv =
+    config:
+        endpoints:
+            loginPageUrl:   LOGIN_PAGE_URL
+            apiBaseUrl:     API_URL_BASE
+
     createSession: (userId, password, callback) ->
         unless callback
             callback = userId
@@ -23,7 +27,7 @@ pixiv =
             return
 
         request.post({
-            url: LOGIN_PAGE_URL
+            url: pixiv.config.endpoints.loginPageUrl
             formData:
                 mode: "login"
                 pixiv_id: userId
@@ -32,6 +36,9 @@ pixiv =
             if error
                 callback error
             setCookies = resp.headers["set-cookie"]
+            unless setCookies
+                callback "failed to login."
+                return
             sessSetCookie = (setCookies.filter (c, i) ->
                 return (c.indexOf "PHPSESSID") == 0)[0]
             unless sessSetCookie
@@ -47,7 +54,7 @@ pixiv =
             p: 1
             illust_id: workId
             "PHPSESSID": session.sessionId
-        url = "#{API_URL_BASE}/illust.php?#{params}"
+        url = "#{pixiv.config.endpoints.apiBaseUrl}/illust.php?#{params}"
         request.get
             url: url
         , (error, resp, body) ->
