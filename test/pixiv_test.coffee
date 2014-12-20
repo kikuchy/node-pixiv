@@ -1,6 +1,8 @@
 expect = (require "chai").expect
 
 pixiv = require "../src/pixiv"
+Session = require "../src/session"
+damySession = new Session "1111_111111111111111111111111111111"
 
 describe "pixiv Methods", () ->
     before () ->
@@ -25,11 +27,16 @@ describe "pixiv Methods", () ->
                 done()
 
     describe "Get Single Work By ID", () ->
-        damySession =
-            sessionId: "1111_111111111111111111111111111111"
-
         it "should return a work", (done) ->
             pixiv.getGrapichWork damySession, "11111", (error, work) ->
                 expect(error).be.not.ok
                 expect(work).be.ok
+                done()
+
+    describe "Search Works from Keyword", () ->
+        it "should return a list of work", (done) ->
+            pixiv.searchWorks damySession, "s_tag", "date", 1, "yuri", (error, works) ->
+                expect(error).be.not.ok
+                expect(works).be.ok
+                expect(works.length).be.ok
                 done()
