@@ -23,3 +23,13 @@ describe "pixiv Methods", () ->
             pixiv.createSession "hoge", "fuga", (error, session) ->
                 expect(error).be.ok
                 done()
+
+    describe "Get Single Work By ID", () ->
+        damySession =
+            sessionId: "1111_111111111111111111111111111111"
+
+        it "should return a work", (done) ->
+            pixiv.getGrapichWork damySession, "11111", (error, work) ->
+                expect(error).be.not.ok
+                expect(work).be.ok
+                done()
