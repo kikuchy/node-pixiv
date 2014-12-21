@@ -82,6 +82,7 @@ pixiv =
             if error
                 callback error
                 return
+            body = body.slice 0, -1
             callback null, (body.split "\n").map((r) ->
                 Work.parseSingle r
             )
