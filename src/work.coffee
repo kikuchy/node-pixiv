@@ -15,7 +15,7 @@ class Work
 
 class GraphicWork extends Work
     constructor: (@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @bookmarkCount, @commentCount, @isAdultOnly, @serverNumber, @smallThumbnail, @middleThumbnail)->
-        super(@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @isAdultOnly)
+        super(@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @bookmarkCount, @commentCount, @isAdultOnly)
 
 class IllustWork extends GraphicWork
     constructor: (@workId, @title, entryDate, tags, @evaluateCount, @evaluateSum, @viewCount, @caption, @bookmarkCount, @commentCount, @isAdultOnly, @serverNumber, @smallThumbnail, @middleThumbnail)->
