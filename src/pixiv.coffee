@@ -62,4 +62,29 @@ pixiv =
                 callback error
             callback null, (Work.parseSingle body)
 
+    searchWorks: (session, mode, order, pageNo, keyword, callback) ->
+        unless session instanceof Session
+            callback = keyword
+            keyword = pageNo
+            pageNo = order
+            order = mode
+            mode = session
+            session = new Session "0"
+
+        params = makeQuery
+            p: pageNo
+            "PHPSESSID": session.sessionId
+            word: keyword
+            s_mode: mode
+            order: order
+        url = "#{pixiv.config.endpoints.apiBaseUrl}/search.php?#{params}"
+        request.get url, (error, resp, body) ->
+            if error
+                callback error
+                return
+            body = body.slice 0, -1
+            callback null, (body.split "\n").map((r) ->
+                Work.parseSingle r
+            )
+
 module.exports = pixiv
