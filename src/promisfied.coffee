@@ -18,7 +18,7 @@ prmPixiv =
 
     searchWorks: (session, mode, order, pageNo, keyword) ->
         return new Promise (resolve, reject) ->
-            pixiv.seachWorks session, mode, order, pageNo, keyword, (error, works) ->
+            pixiv.searchWorks session, mode, order, pageNo, keyword, (error, works) ->
                 if error
                     reject error
                 resolve works
