@@ -16,4 +16,11 @@ prmPixiv =
                     reject error
                 resolve work
 
+    seachWorks: (session, mode, order, pageNo, keyword) ->
+        return new Promise (resolve, reject) ->
+            pixiv.seachWorks session, mode, order, pageNo, keyword, (error, works) ->
+                if error
+                    reject error
+                resolve works
+
 module.exports = prmPixiv
